@@ -1,0 +1,39 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FastAPI with ETCD</title>
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <h1>ETCD Key Manager</h1>
+
+    <label for="key_input">ETCD Key:</label>
+    <input type="text" id="key_input" name="key" value="config/database_url" />
+
+    <label for="value_input">Value:</label>
+    <input type="text" id="value_input" name="value" value="sqlite://db.sqlite3" />
+
+    <div id="update_key">
+        <p>Current key value:</p>
+    </div>
+
+    <button hx-get="/update-key" hx-target="#update_key" hx-swap="innerHTML" hx-trigger="click"
+        hx-include="#key_input, #value_input">
+        Update Key
+    </button>
+
+    <button hx-get="/get-key" hx-target="#update_key" hx-swap="innerHTML" hx-trigger="click" hx-include="#key_input">
+        Get Value
+    </button>
+
+    <button hx-delete="/api/key" hx-target="#update_key" hx-swap="innerHTML" hx-trigger="click" hx-include="#key_input">
+        Delete Key
+    </button>
+</body>
+
+</html>
