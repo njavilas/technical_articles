@@ -1,0 +1,10 @@
+services:
+  cloudflare:
+    image: cloudflare/cloudflared:latest
+    restart: always
+    network_mode: "host"
+
+    command: tunnel run
+
+    env_file:
+      ./cloudflare.env
